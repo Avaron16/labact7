@@ -355,7 +355,8 @@ function showTab(tab) {
 // Products
 const products = {
     "1001": { name: "Tape Measure", price: 190 },
-    "1002": { name: "PVC Pipe", price: 180 }
+    "1002": { name: "PVC Pipe", price: 180 },
+    "UDC-T00-2731": { name: "Pliers", price: 250 } 
 };
 
 // Preloaded cart
@@ -414,7 +415,6 @@ function addItem() {
     document.getElementById('barcode').focus(); // Focus back to barcode for faster scanning
 }
 
-// Enable Enter key to add item
 document.getElementById('barcode').addEventListener('keypress', function(e) {
     if (e.key === 'Enter') {
         addItem();
@@ -426,6 +426,10 @@ function removeItem(index) { cart.splice(index, 1); renderCart(); }
 
 // Open payment modal
 function openPaymentModal() {
+    if (cart.length === 0) {
+        alert("❌ Cart is empty! Please add items before proceeding.");
+        return; 
+    }
     const total = parseFloat(document.getElementById('total').textContent);
     if (total <= 0) { alert("Cart is empty!"); return; }
     document.getElementById('modalTotal').textContent = total.toFixed(2);
