@@ -157,7 +157,7 @@
                                     <option value="">Select</option>
                                     <option>Cement & Concrete</option>
                                     <option>Wood & Steel</option>
-                                    <option>Paint</option>
+                                    <option>Roofing & Bricks</option>
                                     <option>Tools & Paints</option>
                                 </select>
                             </div>
@@ -207,8 +207,8 @@
                         <label for="scontact">Contact Number</label>
                         <input type="number" id="scontact" placeholder="09XXXXXXXXX" required>
 
-                        <label for="semail">Email</label>
-                        <input type="email" id="semail" placeholder="email@example.com" required>
+                        <label for="semail">Email <span style="font-weight: normal; color: #888;">(optional)</span></label>
+                        <input type="email" id="semail" placeholder="Leave blank if none">
 
                         <label for="saddress">Address</label>
                         <textarea id="saddress" rows="3" placeholder="Enter supplier address" required></textarea>
@@ -259,20 +259,31 @@ function generateBarcode() {
 }
 
 function saveProduct() {
-    alert("✅ Product successfully created!");
+    alert("Product successfully created!");
     return false;
 }
 
 // Supplier
 function saveSupplier() {
     const contact = document.getElementById("scontact").value;
+    const email = document.getElementById("semail").value.trim();
+
+    // Validate contact number
     if (contact.length !== 11) {
         alert("Contact number must be 11 digits.");
         return false;
     }
-    alert("✅ Supplier successfully registered!");
+
+    // Validate email if provided
+    if (email && !email.includes("@")) {
+        alert("Please enter a valid email address or leave it blank.");
+        return false;
+    }
+
+    alert("Supplier successfully registered!");
     return false;
 }
 </script>
 </body>
 </html>
+
